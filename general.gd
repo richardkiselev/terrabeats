@@ -1,4 +1,3 @@
-
 extends Node2D
 
 var current_lane = 1
@@ -117,7 +116,7 @@ func _ready():
 
 	$Poobert.position.y = birdlanes[current_lane]
 
-	update_poobert_emotion()
+	update_emotion()
 	update_rat_outline()
 
 
@@ -138,7 +137,7 @@ func generate_fake_envelopes():
 	for i in range(fake_count):
 		fake_note_indices[eligible_indices[i]] = true
 
-	print("Fake envelopes this run: ", fake_count, "/", beat_chart.size())
+	print("fake envelopes this run: ", fake_count, "/", beat_chart.size())
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and not transitioning:
@@ -281,9 +280,9 @@ func try_collect_one() -> bool:
 func apply_spam_penalty():
 	score = max(score - 15.0, 0.0)
 
-	print("Spam penalty! Score: ", score)
+	print("Spiced ham penalty! Score: ", score)
 
-	update_poobert_emotion()
+	update_emotion()
 	update_rat_outline()
 
 
@@ -294,9 +293,9 @@ func collect_envelope(index: int):
 	if note.get("fake", false):
 		score = max(score - 15.0, 0.0)
 
-		print("TRICKED! Fake envelope! Score: ", score)
+		print("LMAOOOO! Fake envelope! Score: ", score)
 
-		update_poobert_emotion()
+		update_emotion()
 		update_rat_outline()
 
 		envelopes.remove_at(index)
@@ -318,7 +317,7 @@ func collect_envelope(index: int):
 
 	print("HIT! Score: ", score)
 
-	update_poobert_emotion()
+	update_emotion()
 	update_rat_outline()
 
 	var tween = create_tween().set_parallel(true)
@@ -335,12 +334,11 @@ func return_to_middle():
 
 	change_lane(1, "down" if current_lane == 0 else "up")
 
-
 func update_music_clock():
 	song_position = $AudioStreamPlayer.get_playback_position()
 
 
-func update_poobert_emotion():
+func update_emotion():
 	var emotion = ""
 
 	if score < 20:
@@ -362,7 +360,7 @@ func update_rat_outline():
 	var material = $Rat.material
 
 	if material == null:
-		print("ERROR: No material assigned to little ratty")
+		print("ERROR: No material assigned to ratty")
 		return
 
 	if not material is ShaderMaterial:
@@ -423,18 +421,14 @@ func move_envelopes():
 	for i in range(envelopes.size() - 1, -1, -1):
 		var note = envelopes[i]
 		var envelope = note["node"]
-
 		var time_offset = song_position - note["hit_time"]
 		var current_x = bird_x - (time_offset * envelope_speed)
-
 		if not note["scored"]:
 			envelope.global_position = Vector2(current_x, lanes[note["lane"]])
-
 		if current_lane == 1 and not note["scored"] and not note["passed"]:
 			if abs(current_x - bird_x) <= hit_window and note["lane"] == 1:
 				collect_envelope(i)
 				continue
-
 		if not note["scored"] and not note["passed"]:
 			if current_x < (bird_x - hit_window):
 				note["passed"] = true
@@ -445,7 +439,7 @@ func move_envelopes():
 					score = max(score - 15.0, 0.0)
 					print("MISS! Score: ", score)
 
-					update_poobert_emotion()
+					update_emotion()
 					update_rat_outline()
 
 			envelope.queue_free()
