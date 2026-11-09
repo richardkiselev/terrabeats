@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://cssfarn7t1xt6"]
+
+[ext_resource type="Script" uid="uid://dntph3i0374iy" path="res://general.gd" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://cps3exrf03m2m" path="res://terrabeatsalt.png" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://dctvdikqs7d2t" path="res://flag-standalone.svg" id="2_0e48y"]
+[ext_resource type="AudioStream" uid="uid://bs1if338yr8jv" path="res://actionable.mp3" id="4_0hol4"]
+
+[sub_resource type="Animation" id="Animation_wtcfe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_0hol4"]
+resource_name = "fade_out"
+length = 1.3333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black:color:a")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.04),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_epypp"]
+resource_name = "logoaway"
+length = 1.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_0e48y"]
+resource_name = "slideup"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.3, 3, 4.8, 5.6),
+"transitions": PackedFloat32Array(0.3, 1, 0.3, 0.3),
+"update": 0,
+"values": [800.0, -100.0, -100.0, 500.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Banner:position:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.6333333, 0.6, 1.7666667, 3),
+"transitions": PackedFloat32Array(0.3, 0, 0.3, 0.3),
+"update": 0,
+"values": [600.0, 100.0, 100.0, 600.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epypp"]
+_data = {
+&"RESET": SubResource("Animation_wtcfe"),
+&"fade_out": SubResource("Animation_0hol4"),
+&"logoaway": SubResource("Animation_epypp"),
+&"slideup": SubResource("Animation_0e48y")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0hol4"]
+load_path = "res://.godot/imported/idle.webp-1046b3d164c73096442641143bfa3cc5.ctex"
+
+[sub_resource type="Animation" id="Animation_q6r6c"]
+resource_name = "up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Poobert:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kdubu"]
+_data = {
+&"up": SubResource("Animation_q6r6c")
+}
+
+[node name="Node2D" type="Node2D" unique_id=276454071]
+scale = Vector2(0.56493163, 7.269461)
+script = ExtResource("1_epypp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=59082324]
+libraries/ = SubResource("AnimationLibrary_epypp")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=112572051]
+libraries/ = SubResource("AnimationLibrary_epypp")
+
+[node name="Logo" type="TextureRect" parent="." unique_id=1845286751]
+top_level = true
+offset_left = -183.0
+offset_top = 500.0
+offset_right = 1417.0
+offset_bottom = 1404.0017
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(800, 452)
+texture = ExtResource("1_wtcfe")
+
+[node name="Banner" type="TextureRect" parent="." unique_id=877018100]
+top_level = true
+offset_left = 100.0
+offset_top = 600.0
+offset_right = 634.0
+offset_bottom = 807.00024
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(800, 452)
+texture = ExtResource("2_0e48y")
+
+[node name="BG" type="Polygon2D" parent="." unique_id=1005050373]
+position = Vector2(-2276.3818, 68.91843)
+rotation = 3.1415925
+scale = Vector2(26.857956, -2.786741)
+color = Color(0.99999994, 0.85965824, 0.68608713, 1)
+polygon = PackedVector2Array(-215.19998, -51.599995, -215.19998, 44.4, -40, 44.4, -40, -51.599995)
+uv = PackedVector2Array(-215.19998, -51.599995, -215.19998, 44.4, -40, 44.4, -40, -47.599995)
+
+[node name="Black" type="ColorRect" parent="." unique_id=103364639]
+z_index = 1
+offset_left = -561.1299
+offset_top = -34.803123
+offset_right = 3228.709
+offset_bottom = 145.12766
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=568121508]
+stream = ExtResource("4_0hol4")
+
+[node name="Poobert" type="Sprite2D" parent="." unique_id=1380055667]
+position = Vector2(235.42673, 50.897858)
+scale = Vector2(0.22949679, 0.019002706)
+texture = SubResource("CompressedTexture2D_0hol4")
+
+[node name="PoobertPlayer" type="AnimationPlayer" parent="." unique_id=615633251]
+libraries/ = SubResource("AnimationLibrary_kdubu")
